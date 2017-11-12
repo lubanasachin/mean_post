@@ -1,3 +1,46 @@
-<p>
-  posts works!
-</p>
+<!-- page header to add new posts -->
+<div class="page-header">
+	<div class="row addnewPost">
+		<div class="col-sm-12">
+			<form #f="ngForm" novalidate>
+				<input class="postText" placeholder="enter post description" required minlength="30" maxlength="255" [(ngModel)]="newPost.description" (keyup.enter)="onAddPost(f.valid)" name="descr" #descr="ngModel" />
+			</form>
+		</div>
+	</div>	
+	<!-- error messages -->
+	<div *ngIf="descr.invalid" class="alert alert-danger">
+		<div *ngIf="descr.errors.required">Post is required.</div>
+		<div *ngIf="descr.errors.minlength">Post must be atleast 30 characters long</div>
+	</div>	
+</div>
+
+<!-- if there are available posts -->
+<section class="page-section" *ngIf="posts.length > 0">
+	<!-- iterate list of available posts -->
+	<div class="row" *ngFor="let post of posts">
+	  <div class="col-sm-12 postDiv">
+	    <div class="card">
+	      <div class="card-block">
+	        <p class="card-text">{{post.description}}</p>
+	        <a href="javascript:void(0);" class="card-link" (click)="onUpvotePost(post);">upvote</a> ({{post.upvote}})
+	        <a href="javascript:void(0);" class="card-link" (click)="onDownvotePost(post);">downvote</a> ({{post.downvote}})
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</section>
+
+<!-- if no posts are created yet -->
+<section class="page-section" *ngIf="posts.length == 0">
+	<div class="row">
+	  <div class="col-sm-12 postDiv">
+	    <div class="card">
+	      <div class="card-block">
+	        <p class="card-text">No posts found!</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
+</section>
+
+

@@ -4,7 +4,7 @@
 */
 export class Post {
 
-	id: number;
+	id: string;
 	description: string = '';
 	upvote: number = 0;
 	downvote: number = 0;
