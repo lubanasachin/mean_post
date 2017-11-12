@@ -12,9 +12,7 @@ let postJSON = require("../../posts.json");
 */
 router.get('/posts',(req,res) => {
 	sortByUpvotesDesc();
-	console.log(postJSON.length);
 	postJSON = postJSON.slice(0,20);
-	console.log(postJSON.length);
 	printDb();	
 	res.send(postJSON);
 });

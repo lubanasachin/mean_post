@@ -5,8 +5,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+	"build": "ng build && node app.js",
+    "fe_test": "ng test",
+    "be_test": "mocha --timeout 10000",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -49,6 +50,10 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.4.2"
+    "typescript": "~2.4.2",
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.4.5"
+
   }
 }
