@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Post } from '../post';
+import { PostDataService } from '../post-data.service';
 
 @Component({
 	selector: 'app-posts',
@@ -20,33 +21,56 @@ export class PostsComponent implements OnInit {
 	//newPost object of Post
 	newPost: Post = new Post();	
 
-	constructor() { }
+	constructor(private postDataService: PostDataService) { }
 
-	//get list of all the available posts on init
 	public ngOnInit() {
 		this.getAllPosts();
 	}
 
+	//get list of all the available posts on init
 	public getAllPosts() {
-		return this.posts;
+		this.postDataService
+		.getAllPosts()
+		.subscribe(
+			(posts) => {
+				this.posts = posts;
+			}
+		)
 	}
 
 	//add new posts
 	onAddPost(isValid) {
-		this.posts = this.posts.concat(this.newPost);
-		this.newPost = new Post();
+		if(!isValid) return false;
+		this.postDataService
+		.addPost(this.newPost)
+		.subscribe(
+			(newPost) => {
+				this.posts = this.posts.concat(newPost);
+				this.newPost = new Post();
+			}
+		)
 	}
 
 	//upvote post
 	onUpvotePost(post: Post) {
-		++post.upvote;
-		return post; 
+		this.postDataService
+		.upvotePost(post)
+		.subscribe(
+			(posts) => {
+				this.posts = posts;
+			}
+		)
 	}
 
 	//downvote post
 	onDownvotePost(post: Post) {
-		++post.downvote;
-		return post; 
+		this.postDataService
+		.downvotePost(post)
+		.subscribe(
+			(posts) => {
+				this.posts = posts;
+			}
+		)
 	}
 
 

@@ -1,7 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { Http, Response } from '@angular/http';
 
 import { PostsComponent } from './posts.component';
+import { PostDataService } from '../post-data.service';
+
 import { Post } from '../post';
 
 describe('PostsComponent', () => {
@@ -11,6 +14,7 @@ describe('PostsComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [ PostsComponent ],
+			providers: [PostDataService],
 			imports: [ FormsModule ]
 		})
 		.compileComponents();
@@ -21,6 +25,12 @@ describe('PostsComponent', () => {
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
+
+/*
+
+	//test cases created to define component, since using service now.
+	//not needed anymore
+	
 
 	it('should create', () => {
 		expect(component).toBeTruthy();
@@ -56,6 +66,6 @@ describe('PostsComponent', () => {
 		let upPost = component.onDownvotePost(post1);
 		expect(upPost.downvote).toEqual(13);
 	});
-	
+*/	
 
 });
